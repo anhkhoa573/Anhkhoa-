@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANHKHOA PREMIUM LUA CRYPTER V3.0</title>
+    <title>ANHKHOA PREMIUM LUA CRYPTER V3.5</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
         body { background: radial-gradient(circle at 50% 10%, #080911 0%, #030305 100%); color: #00ffcc; min-height: 100vh; padding: 20px 15px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
@@ -20,22 +20,28 @@
         .mini-btn:hover { background: #00ffcc; color: #050508; box-shadow: 0 0 10px rgba(0, 255, 204, 0.4); }
         .mini-btn.danger { color: #ff4a4a; border-color: rgba(255, 74, 74, 0.3); background: rgba(255, 74, 74, 0.1); }
         .mini-btn.danger:hover { background: #ff4a4a; color: #fff; box-shadow: 0 0 10px rgba(255, 74, 74, 0.4); }
-        .tool-group { display: flex; gap: 8px; align-items: center; }
         .file-input-label { background: rgba(0, 204, 255, 0.1); border: 1px solid rgba(0, 204, 255, 0.3); color: #00ccff; padding: 4px 10px; font-size: 0.75rem; font-weight: bold; border-radius: 6px; cursor: pointer; text-transform: uppercase; display: inline-block; }
-        .file-input-label:hover { background: #00ffcc; color: #050508; box-shadow: 0 0 10px rgba(0, 255, 204, 0.4); }
+        .file-input-label:hover { background: #00ffcc; color: #050508; box-shadow: 0 0 10px rgba(0, 204, 255, 0.4); }
         input[type="file"] { display: none; }
-        textarea { width: 100%; height: 380px; background: #05070c; color: #00ffcc; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 18px; font-family: 'Consolas', 'Courier New', monospace; font-size: 13.5px; resize: none; outline: none; line-height: 1.5; transition: border-color 0.2s, box-shadow 0.2s; box-shadow: inset 0 3px 10px rgba(0,0,0,0.8); }
+        textarea { width: 100%; height: 350px; background: #05070c; color: #00ffcc; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 18px; font-family: 'Consolas', 'Courier New', monospace; font-size: 13.5px; resize: none; outline: none; line-height: 1.5; box-shadow: inset 0 3px 10px rgba(0,0,0,0.8); }
         textarea:focus { border-color: #00ffcc; box-shadow: 0 0 12px rgba(0, 255, 204, 0.25), inset 0 3px 10px rgba(0,0,0,0.8); }
         #outputCode { color: #00ccff; background: #030408; }
-        #outputCode:focus { border-color: #00ffcc; box-shadow: 0 0 12px rgba(0, 204, 255, 0.25), inset 0 3px 10px rgba(0,0,0,0.8); }
+        
+        .loadstring-box { margin-top: 20px; background: rgba(112, 0, 255, 0.1); border: 1px solid rgba(112, 0, 255, 0.4); padding: 15px; border-radius: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 0 15px rgba(112, 0, 255, 0.1); }
+        .loadstring-header { display: flex; justify-content: space-between; align-items: center; }
+        .loadstring-header label { font-weight: bold; color: #b380ff; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .loadstring-input-group { display: flex; gap: 10px; }
+        .loadstring-input-group input { flex: 1; background: #04050a; border: 1px solid rgba(112, 0, 255, 0.3); border-radius: 8px; padding: 10px 15px; color: #d9b3ff; font-family: 'Consolas', monospace; font-size: 13px; outline: none; }
+        .purple-btn { background: rgba(112, 0, 255, 0.2); border: 1px solid #7000ff; color: #d9b3ff; padding: 8px 16px; font-size: 0.8rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
+        .purple-btn:hover { background: #7000ff; color: #fff; box-shadow: 0 0 12px rgba(112, 0, 255, 0.5); }
+
         .config-box { margin-top: 15px; display: flex; justify-content: center; gap: 20px; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); width: 100%; }
         .checkbox-container { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #8fa0af; font-weight: bold; cursor: pointer; text-transform: uppercase; }
         .checkbox-container input { cursor: pointer; accent-color: #00ffcc; width: 16px; height: 16px; }
         .btn-container { margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        .main-btn { background: linear-gradient(135deg, #00ffcc 0%, #0088ff 100%); color: #030408; border: none; padding: 15px 60px; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; border-radius: 14px; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 0 25px rgba(0, 255, 204, 0.35); position: relative; }
+        .main-btn { background: linear-gradient(135deg, #00ffcc 0%, #0088ff 100%); color: #030408; border: none; padding: 15px 60px; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; border-radius: 14px; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 0 25px rgba(0, 255, 204, 0.35); }
         .main-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 35px rgba(0, 255, 204, 0.6); }
-        .main-btn:active { transform: translateY(1px) scale(0.99); }
-        .loading { display: none; color: #00ccff; font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; text-shadow: 0 0 8px rgba(0, 204, 255, 0.4); animation: pulseText 1s infinite alternate; }
+        .loading { display: none; color: #00ccff; font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; animation: pulseText 1s infinite alternate; }
         @keyframes pulseGlow { 0% { filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.3)); } 100% { filter: drop-shadow(0 0 25px rgba(0, 255, 204, 0.6)); } }
         @keyframes pulseText { 0% { opacity: 0.4; } 100% { opacity: 1; } }
     </style>
@@ -65,11 +71,21 @@
                 <div class="toolbar">
                     <label>// Mã Đã Khóa (Anti-Crack)</label>
                     <div class="tool-group">
-                        <button class="mini-btn" onclick="copyToClipboard()">COPY CODE</button>
+                        <button class="mini-btn" onclick="copyToClipboard('outputCode')">COPY CODE</button>
                         <button class="mini-btn danger" onclick="clearAll('outputCode')">XÓA KẾT QUẢ</button>
                     </div>
                 </div>
                 <textarea id="outputCode" readonly placeholder="-- File mã hóa tối cao dạng Bytecode bảo mật sẽ xuất ra tại đây..."></textarea>
+            </div>
+        </div>
+
+        <div class="loadstring-box">
+            <div class="loadstring-header">
+                <label>⚡ DELTA / EXECUTOR LOADSTRING SCRIPT (RAW METHOD) ⚡</label>
+                <button class="purple-btn" onclick="copyToClipboard('loadstringUrl')">COPY LOADSTRING</button>
+            </div>
+            <div class="loadstring-input-group">
+                <input type="text" id="loadstringUrl" readonly placeholder='-- Đoạn code loadstring game:HttpGet của bạn sẽ xuất hiện tại đây sau khi bấm mã hóa...'>
             </div>
         </div>
         
@@ -90,47 +106,25 @@
 
     <script>
         function importFile(input) {
-            const file = input.files[0];
+            const file = input.files;
             if (!file) return;
             const reader = new FileReader();
             reader.onload = function(e) { document.getElementById('inputCode').value = e.target.result; };
             reader.readAsText(file);
         }
 
-        function clearAll(targetId) { document.getElementById(targetId).value = ''; }
+        function clearAll(targetId) { 
+            document.getElementById(targetId).value = ''; 
+            if(targetId === 'outputCode') document.getElementById('loadstringUrl').value = '';
+        }
 
-        function copyToClipboard() {
-            const outputText = document.getElementById('outputCode');
-            if (!outputText.value) { alert('Chưa có code để copy!'); return; }
-            outputText.select();
-            navigator.clipboard.writeText(outputText.value);
-            alert('Đã copy mã hóa thành công vào khay nhớ tạm! 🎉');
+        function copyToClipboard(targetId) {
+            const inputField = document.getElementById(targetId);
+            if (!inputField.value) { alert('Chưa có nội dung để sao chép!'); return; }
+            inputField.select();
+            navigator.clipboard.writeText(inputField.value);
+            alert('Đã copy thành công vào khay nhớ tạm! 🎉');
         }
 
         async function handleObfuscate() {
-            const code = document.getElementById('inputCode').value.trim();
-            const output = document.getElementById('outputCode');
-            const loading = document.getElementById('loadingText');
-            
-            if (!code) { alert('Vui lòng nhập hoặc chọn file Lua trước!'); return; }
-            
-            loading.style.display = 'block';
-            output.value = '';
-
-            try {
-                const response = await fetch('/api/obfuscate', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        code: code,
-                        antiDump: document.getElementById('antiDumpOpt').checked,
-                        antiPrint: document.getElementById('antiPrintOpt').checked
-                    })
-                });
-                const data = await response.json();
-                if (data.error) { alert('Lỗi: ' + data.error); } else { output.value = data.result; }
-            } catch (err) { alert('Mất kết nối máy chủ!'); } finally { loading.style.display = 'none'; }
-        }
-    </script>
-</body>
-</html>
+const code = document.getElementById('inputCode').value.trim();const output = document.getElementById('outputCode');const loadstringUrl = document.getElementById('loadstringUrl');const loading = document.getElementById('loadingText');if (!code) { alert('Vui lòng nhập hoặc chọn file Lua trước!'); return; }loading.style.display = 'block';output.value = '';loadstringUrl.value = '';try {const response = await fetch('/api/obfuscate', {method: 'POST',headers: { 'Content-Type': 'application/json' },body: JSON.stringify({code: code,antiDump: document.getElementById('antiDumpOpt').checked,antiPrint: document.getElementById('antiPrintOpt').checked})});const data = await response.json();if (data.error) {alert('Lỗi: ' + data.error);} else {output.value = data.result;const currentDomain = window.location.origin;loadstringUrl.value = loadstring(game:HttpGet("${currentDomain}/raw/${data.rawId}"))();}} catch (err) {alert('Mất kết nối máy chủ!');} finally {loading.style.display = 'none';}}
